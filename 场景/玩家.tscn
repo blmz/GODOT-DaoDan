@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2jnt0l0010ga"]
+
+[ext_resource type="Texture2D" uid="uid://briy2a0lluj8i" path="res://图片/icon.svg" id="1_i23jj"]
+[ext_resource type="Script" path="res://脚本/玩家.gd" id="1_uxav7"]
+[ext_resource type="PackedScene" uid="uid://dyokggs7wtij0" path="res://场景/导弹.tscn" id="2_la556"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0utul"]
+size = Vector2(121, 125)
+
+[node name="玩家" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_uxav7")
+"导弹" = ExtResource("2_la556")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_0utul")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_i23jj")

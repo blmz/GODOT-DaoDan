@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcotfsm32a462"]
+
+[ext_resource type="Texture2D" uid="uid://briy2a0lluj8i" path="res://图片/icon.svg" id="1_rueya"]
+[ext_resource type="Script" path="res://node_2d.gd" id="2_10ujt"]
+
+[node name="Icon" type="Sprite2D"]
+texture = ExtResource("1_rueya")
+script = ExtResource("2_10ujt")

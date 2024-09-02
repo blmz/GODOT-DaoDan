@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://c30qjmy3l24ua"]
+
+[ext_resource type="Texture2D" uid="uid://cxh1ees502bro" path="res://图片/纯白背景.png" id="1_46otv"]
+[ext_resource type="Script" path="res://场景/场地.gd" id="1_aomqx"]
+[ext_resource type="PackedScene" uid="uid://dgr5yljbw36my" path="res://场景/飞剑.tscn" id="2_m2yt0"]
+[ext_resource type="Texture2D" uid="uid://briy2a0lluj8i" path="res://图片/icon.svg" id="3_wq1pk"]
+[ext_resource type="PackedScene" uid="uid://dmi4llcqkdycw" path="res://node_2d.tscn" id="5_oqqko"]
+
+[node name="场地" type="Node2D"]
+script = ExtResource("1_aomqx")
+
+[node name="背景" type="Sprite2D" parent="."]
+modulate = Color(0.54099, 0.54099, 0.54099, 1)
+position = Vector2(585, 327.5)
+scale = Vector2(4.89855, 12.1389)
+texture = ExtResource("1_46otv")
+metadata/_edit_lock_ = true
+
+[node name="飞剑" parent="." instance=ExtResource("2_m2yt0")]
+position = Vector2(272, 255)
+
+[node name="坐标" type="Node2D" parent="."]
+position = Vector2(445, 180)
+
+[node name="目标坐标" type="Sprite2D" parent="坐标"]
+modulate = Color(1, 0, 1, 1)
+scale = Vector2(0.226563, 0.21875)
+texture = ExtResource("3_wq1pk")
+
+[node name="原点" type="Sprite2D" parent="坐标"]
+modulate = Color(0, 0, 0.690196, 1)
+scale = Vector2(0.226563, 0.21875)
+texture = ExtResource("3_wq1pk")
+
+[node name="当前坐标" type="Sprite2D" parent="坐标"]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.238281, 0.243144)
+texture = ExtResource("3_wq1pk")
+
+[node name="转向速度" type="HSlider" parent="."]
+offset_left = 919.0
+offset_top = 36.0
+offset_right = 1078.0
+offset_bottom = 62.0
+min_value = 100.0
+max_value = 1000.0
+value = 100.0
+
+[node name="Label" type="Label" parent="转向速度"]
+layout_mode = 0
+offset_left = -68.0
+offset_right = -4.0
+offset_bottom = 23.0
+text = "转向速度"
+
+[node name="移动速度" type="HSlider" parent="."]
+offset_left = 919.0
+offset_top = 95.0
+offset_right = 1078.0
+offset_bottom = 118.0
+min_value = 100.0
+max_value = 1000.0
+value = 100.0
+
+[node name="Label" type="Label" parent="移动速度"]
+layout_mode = 0
+offset_left = -68.0
+offset_right = -4.0
+offset_bottom = 23.0
+text = "移动速度"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 752.0
+offset_top = 236.0
+offset_right = 816.0
+offset_bottom = 259.0
+text = "转向速度"
+
+[node name="Node2D" parent="." instance=ExtResource("5_oqqko")]
+position = Vector2(637, 447)
+
+[connection signal="drag_ended" from="转向速度" to="飞剑" method="_on_转向速度_drag_ended"]
+[connection signal="drag_ended" from="移动速度" to="飞剑" method="_on_移动速度_drag_ended"]

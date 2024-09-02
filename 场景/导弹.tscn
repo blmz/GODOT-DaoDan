@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://dyokggs7wtij0"]
+
+[ext_resource type="Texture2D" uid="uid://lp15g4moay8r" path="res://图片/导弹.png" id="1_8ggjs"]
+[ext_resource type="Script" path="res://脚本/导弹.gd" id="2_ueprh"]
+[ext_resource type="Texture2D" uid="uid://cxh1ees502bro" path="res://图片/纯白背景.png" id="3_dacj1"]
+[ext_resource type="Script" path="res://脚本/line_2d.gd" id="4_43dje"]
+[ext_resource type="PackedScene" uid="uid://ciswm4yjduugo" path="res://场景/爆炸.tscn" id="5_ftafj"]
+
+[sub_resource type="Curve" id="Curve_3pybe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_fluh0"]
+colors = PackedColorArray(0.980469, 0.114899, 0, 1, 0.988281, 0.863178, 0.0463257, 1)
+
+[sub_resource type="Gradient" id="Gradient_0uou8"]
+colors = PackedColorArray(0.988281, 0.00386047, 0.00386047, 1, 0.939541, 0.96875, 0.0340576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u0ov5"]
+gradient = SubResource("Gradient_0uou8")
+
+[sub_resource type="Curve" id="Curve_4sdex"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.362637), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0v7bd"]
+curve = SubResource("Curve_4sdex")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8bn6n"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 658.1
+direction = Vector3(0, 1, 0)
+spread = 22.642
+initial_velocity_min = 252.69
+initial_velocity_max = 537.63
+angular_velocity_min = -61.94
+angular_velocity_max = 209.03
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 52.69
+linear_accel_max = 52.69
+scale_min = 3.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_0v7bd")
+color_ramp = SubResource("GradientTexture1D_u0ov5")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tnhw"]
+size = Vector2(53.3333, 200)
+
+[node name="导弹" type="Sprite2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_8ggjs")
+offset = Vector2(0, -0.000305176)
+script = ExtResource("2_ueprh")
+"爆炸粒子" = ExtResource("5_ftafj")
+
+[node name="尾部" type="Node2D" parent="."]
+position = Vector2(0, 100)
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = 1
+width = 5.0
+width_curve = SubResource("Curve_3pybe")
+gradient = SubResource("Gradient_fluh0")
+texture = ExtResource("3_dacj1")
+texture_mode = 2
+joint_mode = 2
+script = ExtResource("4_43dje")
+"最大数量" = 20
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 120)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_8bn6n")
+lifetime = 0.3
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(7.94729e-07, -3.17891e-06)
+shape = SubResource("RectangleShape2D_8tnhw")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

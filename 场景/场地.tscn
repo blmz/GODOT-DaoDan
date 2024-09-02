@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://c30qjmy3l24ua"]
+
+[ext_resource type="Texture2D" uid="uid://cxh1ees502bro" path="res://图片/纯白背景.png" id="1_46otv"]
+[ext_resource type="Script" path="res://脚本/场地.gd" id="1_aomqx"]
+[ext_resource type="PackedScene" uid="uid://clpyjd616xpwf" path="res://场景/敌人.tscn" id="2_rvce5"]
+[ext_resource type="PackedScene" uid="uid://c2jnt0l0010ga" path="res://场景/玩家.tscn" id="2_xv0yo"]
+
+[node name="场地" type="Node2D"]
+script = ExtResource("1_aomqx")
+"敌人" = ExtResource("2_rvce5")
+
+[node name="玩家" parent="." instance=ExtResource("2_xv0yo")]
+position = Vector2(177, 341)
+
+[node name="背景" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.54099, 0.54099, 0.54099, 1)
+z_index = -10
+position = Vector2(585, 327.5)
+scale = Vector2(4.89855, 12.1389)
+texture = ExtResource("1_46otv")
+metadata/_edit_lock_ = true
+
+[node name="转向速度" type="HSlider" parent="."]
+visible = false
+offset_left = 919.0
+offset_top = 36.0
+offset_right = 1078.0
+offset_bottom = 62.0
+min_value = 100.0
+max_value = 1000.0
+value = 100.0
+
+[node name="Label" type="Label" parent="转向速度"]
+layout_mode = 0
+offset_left = -68.0
+offset_right = -4.0
+offset_bottom = 23.0
+text = "转向速度"
+
+[node name="移动速度" type="HSlider" parent="."]
+visible = false
+offset_left = 919.0
+offset_top = 95.0
+offset_right = 1078.0
+offset_bottom = 118.0
+min_value = 100.0
+max_value = 1000.0
+value = 100.0
+
+[node name="Label" type="Label" parent="移动速度"]
+layout_mode = 0
+offset_left = -68.0
+offset_right = -4.0
+offset_bottom = 23.0
+text = "移动速度"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 752.0
+offset_top = 236.0
+offset_right = 816.0
+offset_bottom = 259.0
+text = "转向速度"
+
+[node name="敌人" parent="." instance=ExtResource("2_rvce5")]
+position = Vector2(988, 343)

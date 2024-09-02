@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://clpyjd616xpwf"]
+
+[ext_resource type="Texture2D" uid="uid://briy2a0lluj8i" path="res://图片/icon.svg" id="1_rokmr"]
+[ext_resource type="Script" path="res://脚本/敌人.gd" id="2_wnw07"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7gnn"]
+size = Vector2(129, 126)
+
+[node name="敌人" type="Sprite2D" groups=["敌人"]]
+modulate = Color(0.976563, 0.167847, 0.167847, 1)
+texture = ExtResource("1_rokmr")
+script = ExtResource("2_wnw07")
+
+[node name="RigidBody2D" type="Area2D" parent="." groups=["敌人"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_q7gnn")
+
+[connection signal="area_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_area_entered"]
